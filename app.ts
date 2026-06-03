@@ -1,5 +1,5 @@
 // app.ts - Hlavní logika aplikace
-import { cvikyData } from './data';
+import { cvikyData } from './data.js';
 
 // Abstraktní bázová třída
 abstract class ExerciseItem {
@@ -94,3 +94,21 @@ for (let data of cvikyData) {
 
 // Testovací výpis do konzole pro 1. fázi vývoje
 dnesniTrenink.printSummary();
+
+// === PROPOJENÍ S HTML PŘES DOM ===
+const tlacitko = document.getElementById('tlacitko-vypsat');
+const vystupHtml = document.getElementById('vystup');
+
+if (tlacitko && vystupHtml) {
+    tlacitko.addEventListener('click', () => {
+        let objem = dnesniTrenink.getTotalVolume();
+        
+        vystupHtml.innerHTML = `<strong>Uživatelské rozhraní MGFITGym:</strong>\n\n`;
+        vystupHtml.innerHTML += `Úspěšně oživeno ${cvikyData.length} objektů z číselníku.\n`;
+        vystupHtml.innerHTML += `Detailní logy byly odeslány do konzole vývojáře (F12).\n\n`;
+        vystupHtml.innerHTML += `<strong>CELKOVÝ OBJEM TRÉNINKU: ${objem}</strong>`;
+        
+        // Spustí výpis do konzole i při kliknutí
+        dnesniTrenink.printSummary();
+    });
+}
