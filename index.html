@@ -2,20 +2,113 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>MGFITGym</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGFITGym - Tréninkový Deník</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="kontejner">
-        <h1>🏋️ MGFITGym</h1>
-        <div class="karta">
-            <h2>Výpis tvého tréninku</h2>
-            <div id="vystup">
-                <p>Klikni na tlačítko pro načtení dat...</p>
-            </div>
-            <button id="tlacitko-vypsat">Načíst a vypsat trénink</button>
+
+    <header>
+        <div class="container">
+            <h1>🏋️‍♂️ MGFITGym App</h1>
+            <p>Profesionální správa a analýza tréninků (OOP TypeScript)</p>
         </div>
-    </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="card form-section">
+            <h2>Přidat nový cvik do tréninku</h2>
+            <form id="exercise-form">
+                
+                <div class="form-group">
+                    <label for="ex-name">Název cviku:</label>
+                    <input type="text" id="ex-name" placeholder="Např. Bench press, Dřepy, Běh..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ex-type">Typ cvičení:</label>
+                    <select id="ex-type">
+                        <option value="silove">💪 Silový trénink</option>
+                        <option value="kardio">🏃 Kardio / Vytrvalost</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ex-sets">Série:</label>
+                        <input type="number" id="ex-sets" value="3" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ex-reps">Opakování:</label>
+                        <input type="number" id="ex-reps" value="10" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ex-rest">Odpočinek (s):</label>
+                        <input type="number" id="ex-rest" value="60" min="0" required>
+                    </div>
+                </div>
+
+                <div id="strength-inputs" class="dynamic-inputs">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ex-weight">Váha (kg):</label>
+                            <input type="number" id="ex-weight" value="60" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="ex-muscle">Svalová skupina:</label>
+                            <input type="text" id="ex-muscle" placeholder="Např. Hrudník, Nohy">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cardio-inputs" class="dynamic-inputs hidden">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ex-distance">Vzdálenost (km):</label>
+                            <input type="number" id="ex-distance" value="5" min="0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="ex-duration">Čas (minuty):</label>
+                            <input type="number" id="ex-duration" value="30" min="1">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">➕ Přidat cvik do rozpisu</button>
+            </form>
+        </section>
+
+        <section class="workout-dashboard">
+            
+            <div class="card summary-card">
+                <h2>📊 Celkové statistiky</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">Počet cviků</span>
+                        <span id="stat-count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-box highlight">
+                        <span class="stat-label">Celkový objem</span>
+                        <span id="stat-volume" class="stat-value">0</span>
+                        <small id="stat-volume-unit">jednotek</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card list-card">
+                <h2>📋 Rozpis cvičení v tréninku</h2>
+                <div id="workout-list" class="workout-list">
+                    <p class="empty-message">Trénink je zatím prázdný. Přidej první cvik pomocí formuláře.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MGFITGym App | Výukový softwarový projekt SPŠ</p>
+    </footer>
+
     <script type="module" src="app.js"></script>
 </body>
 </html>
