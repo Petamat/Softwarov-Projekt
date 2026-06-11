@@ -1,35 +1,167 @@
+/* RESET STYLŮ: Vynulování vnitřních a vnějších okrajů, nastavení moderního fontu */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Pozadí celé stránky a základní výška řádku */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    padding: 20px;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
 }
-.kontejner {
-    max-width: 600px;
+
+/* Omezovač šířky obsahu, aby se web neroztahoval do krajů na velkých monitorech */
+.container {
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 0 20px;
 }
-h1 { text-align: center; color: #2c3e50; }
-.karta {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+/* HLAVIČKA: Moderní modrý přechod (gradient) se stínem */
+header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-#vystup {
-    background-color: #eef2f5;
-    padding: 15px;
-    border-radius: 5px;
+
+header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+header p { font-weight: 300; opacity: 0.9; }
+
+/* KARTY (Bílé boxy s jemným stínem, ve kterých je formulář a výsledky) */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    color: #1e3c72;
     margin-bottom: 20px;
-    font-family: monospace;
-    white-space: pre-wrap;
+    border-bottom: 2px solid #eef2f7;
+    padding-bottom: 10px;
 }
-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+
+/* FORMULÁŘE: Vertikální skládání popisků a vstupů */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Stylování inputů a selectů (rámečky, zaoblení, vnitřní odsazení) */
+.form-group input, .form-group select {
     width: 100%;
+    padding: 10px;
+    border: 1px solid #ccd4e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
 }
-button:hover { background-color: #2980b9; }
+
+/* Modré zvýraznění aktivního políčka při kliknutí (focus) */
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #2a5298;
+}
+
+/* FLEXBOX ŘÁDEK: Umístí malé inputy (série, opakování) vedle sebe */
+.form-row {
+    display: flex;
+    gap: 15px; /* Mezera mezi sloupci */
+}
+
+.form-row .form-group {
+    flex: 1; /* Všechny sloupce v řádku budou stejně široké */
+}
+
+/* TLAČÍTKO: Výrazné zelené tlačítko s efektem při najetí myší */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary { background-color: #28a745; color: white; }
+.btn-primary:hover { background-color: #218838; }
+
+/* DYNAMICKÉ SKRÝVÁNÍ: Třída, kterou přes TS budeme přidávat/odebírat polím */
+.hidden {
+    display: none !important;
+}
+
+/* STATISTIKY: Rozložení krabiček se statistikami vedle sebe */
+.stats-grid {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-box {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-box.highlight { background: #edf2f7; border-color: #cbd5e0; }
+.stat-label { display: block; font-size: 0.85rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+.stat-value { display: block; font-size: 1.8rem; font-weight: bold; color: #1e3c72; }
+
+.empty-message { color: #64748b; text-align: center; font-style: italic; padding: 20px 0; }
+
+/* KARTA CVIKU: Dynamicky generovaná karta s výsledkem */
+.exercise-card {
+    background: #f8fafc;
+    border-left: 5px solid #2a5298; /* Modrý proužek pro silový cvik */
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Pokud se bude jednat o kardio, přepíšeme proužek na oranžový */
+.exercise-card.cardio {
+    border-left-color: #e67e22;
+}
+
+.ex-info h3 { font-size: 1.1rem; color: #2d3748; }
+.ex-badge { background: #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+footer { text-align: center; padding: 20px 0; color: #718096; font-size: 0.85rem; margin-top: 40px; }
+
+/* =========================================================================
+   📱 MEDIA QUERY PRO RESPONSIVITU (MOBIL VS PC)
+   ========================================================================= */
+/* Pokud je obrazovka široká alespoň 768px (tablet/PC), přepneme layout na 2 sloupce */
+@media (min-width: 768px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Levý a pravý sloupec 50% na 50% */
+        gap: 30px;
+        align-items: start; /* Zarovná karty k hornímu okraji */
+    }
+    header h1 { font-size: 2.8rem; }
+}
